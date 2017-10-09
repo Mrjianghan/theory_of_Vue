@@ -139,7 +139,7 @@ Vue.use(demo)
 然后再调用：
 ```vue
 <template>
-  <demo my-data="someValue"></demo>
+  <demo :my-data="someValue"></demo>
   //注意这里要把驼峰格式转化成'-'，HTML不识别大小写的。
 </template>
 ```
