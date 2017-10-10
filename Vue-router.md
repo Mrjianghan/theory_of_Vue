@@ -123,7 +123,7 @@ const routes = [
   <router-view></router-view>
 </keep-alive>
 ```
-用<keep-alive>标签来缓存组件，但是需要注意，如果有些状态无法保留，比如窗口滚动的位置，你可以在组件中，将这个滚动的位置存入到data中，当组件在`<keep-alive>`内被切换回来的时候，会触发 `activated` 和 `deactivated` 钩子函数，我们可以利用这个钩子函数，重新定位窗口滚动位置。
+用`<keep-alive>`标签来缓存组件，但是需要注意，如果有些状态无法保留，比如窗口滚动的位置，你可以在组件中，将这个滚动的位置存入到data中，当组件在`<keep-alive>`内被切换回来的时候，会触发 `activated` 和 `deactivated` 钩子函数，我们可以利用这个钩子函数，重新定位窗口滚动位置。
 
 ```js
 export default {
