@@ -109,13 +109,31 @@ new Vue({
 </script>
 ```
 注意，这里的回调函数要写成箭头函数，防止this错乱。不想写的话，可以用that = this的老办法。<br />
-这种触发-监听过程，可以创建n个，只要是事件名能对上就行。到这里，基本简单的项目中的通信方法，你都会了。
+这种触发-监听过程，可以创建n个，只要是事件名能对上就行。到这里，基本简单的项目中的通信方法，你都会了。<br />
 
+# Vuex基础
 
+## 简单的Vuex应用
 
+Vuex可以看作是加强版的enventBus。所以说，一旦你懂了eventBus，那么Vuex也是很容易上手的。
 
+#### 插件安装
 
+```
+npm install vuex --save
+```
+或者在package.json的依赖中添加vuex，再`npm install`就可以了。
 
+#### 插件注册
+
+在main.js中：<br />
+```js
+import Vue from 'vue'
+import Vuex from 'vuex'
+Vue.use(Vuex)
+```
+
+####
 
 
 
