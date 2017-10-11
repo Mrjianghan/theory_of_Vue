@@ -113,9 +113,15 @@ new Vue({
 
 # Vuex基础
 
-## 简单的Vuex应用
+#### Vuex能做什么
 
-Vuex可以看作是加强版的enventBus。所以说，一旦你懂了eventBus，那么Vuex也是很容易上手的。
+如果你有两个组件，分别为A和B，而你需要在A被点击的时候传递一个值number给B，那么一个简简单单的eventBus就能满足你的要求。 <br />
+<br />
+but，假如你有20个组件，分别为C1、C2、C3......C20，而你需要在点击C1的时候，传递一个对象obj给C2~C20。并且，这个obj有许多个属性，假如有obj.number(一个数值)、obj.add（一个方法）、obj.array(一个数组)....等等，C2~C20要分别获取这些属性，并且。。当C2获得obj.number之后，又会触发一个methods，获得一个结果answer,这个answer需要传递给C3、C4,并且传给C4之前需要把answer加上10。<br />
+假如你全用eventBus来做的话，代码耦合得不能看了。。<br />
+......<br />
+讲了这么多，Vuex就是来处理这种很实际很复杂的问题的。比如购物车组件。比如登陆框等等。
+
 
 #### 插件安装
 
@@ -133,10 +139,75 @@ import Vuex from 'vuex'
 Vue.use(Vuex)
 ```
 
-####
+## 一个项目中，和Vuex相关的部分
+
+先仔细的阅读下官方文档，如果遇到了迷惑，需要一些点拨了，这里能给你很好的解答。<br />
+
+- 根组件中： <br />
+
+导入Vuex、挂载store
+
+- store文件夹中： <br />
+
+index.js(含state、getter)、mutation.js、action.js、module文件夹（module中：子store，重要部分的通信）
+
+- 组件中： <br />
+
+集中处理：mapState/mapGetter/mapMutation/mapAction；<br />
+单独处理：store.state.xxx 等。<br />
+
+## 要点打通
+
+#### mapState是做什么的
+
+如果在组件的computed中，我们获取state的方式如下：
+
+```js
+template: `<div>{{count}}</div>`,
+computed: {
+  getCount () {
+    return store.state.count
+  }
+}
+```
+假如我们需要调用多个state（如count1~count5），就需要命名多个计算属性。一大串的重复代码实在是浪费时间。所以Vue官方提供了简化的方法：<br />
+
+```js
+import {mapState} from Vuex
+//...
+computed: mapState({
+  count1: count1, //或者直接写 count 官网提供了三种写法。
+  count2,
+  count3,
+  count4,
+  count5
+})
+```
+整个世界都清净了有木有。<br />
+
+那么问题来了，要是我这个组件的computed属性里面还有别的属性怎么办？可以用对象展开运算符：
+```js
+computed: {
+  otherCalculation () {
+    //...
+  },
+  ...mapState({
+    //...
+  })
+}
+```
+这个操作也就是将mapState里面的方法都取出来，然后依次添加在computed里面。相当于从对象里面剥离出来了属性。<br />
+
+同样的，mapGetter等，都是这种功能。不再赘述。 <br />
+
+#### action是做什么的
+
+- 因为mutation无法处理异步操作，所以就有了action这个强大的东西。<br />
+
+- action配合promise或者async/await更为强大。
 
 
-
+#### 其它。。应该没难的地方了吧。。感觉就是关于map的地方被卡了一下。要是有问题的话可以随时让我更新解答。
 
 
 
