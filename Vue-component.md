@@ -35,7 +35,7 @@
     watch: {
       // 监听
     },
-    method: {
+    methods: {
       // 方法
     }
     /*
